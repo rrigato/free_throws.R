@@ -41,16 +41,6 @@ for (i in 1:g)
 prob_missing15_freethrows = sum(outcome)/ g
 prob_missing15_freethrows; 
 
-for( i in 1:v)
-{
-	x = 0;
-	while(t!=0)
-	{
-		t = rbinom(1,15,prob);
-		x = x+1;
-	}
-
-}
 
 
 
@@ -74,3 +64,32 @@ for (i in 1:g)
 }
 prob_missing15_freethrows = sum(outcome)/ g
 prob_missing15_freethrows; 
+
+
+
+k = 10000;
+v = 1000000;
+number_of_games = numeric(k);
+for( i in 1:k)
+{
+	x = 0;
+	counter = 1;
+	t = numeric(v);
+	repeat
+	{
+
+		t[counter] = rbinom(1,15,prob);
+
+		if (t[counter]==0)
+		{
+			break;
+		}
+		else
+		{
+		counter = counter +1;
+		x = x+1;
+		}
+	}
+	
+	number_of_games[i] = x;
+}
