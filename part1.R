@@ -51,3 +51,26 @@ for( i in 1:v)
 	}
 
 }
+
+
+
+#confidence interval using actual data
+p_hat = .5164; #sample proportion
+alpha = .05; #significance level
+n=171; #number of observations
+margin_of_error = qnorm(1-alpha/2, mean=0,sd=1)*sqrt((p_hat*(1-p_hat))/n); margin_of_error; #Margin of error
+CI_upper = p_hat + margin_of_error; CI_lower = p_hat - margin_of_error; CI_upper; CI_lower; #lower and upper bounds for confidence interval
+
+
+#simulation using the lower limit of the confidence interval from empirical data
+set.seed(3)  #For repeatable results
+prob = .441  #lower limit based on empirical data 
+x = 100000; g=10000; 
+outcome = numeric(g); z = numeric(x) 
+for (i in 1:g)
+{
+   z = rbinom(x,15,prob);   
+	outcome[i] = mean(z==0);    
+}
+prob_missing15_freethrows = sum(outcome)/ g
+prob_missing15_freethrows; 
