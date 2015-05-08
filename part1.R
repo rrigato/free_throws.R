@@ -23,7 +23,7 @@ CI_upper = p_hat + margin_of_error; CI_lower = p_hat - margin_of_error; CI_upper
 
 set.seed(1);   #For repeatable results
 prob = .522    #probability of making a free throw
-cuts = c(-1:16);  #Creates the bins for the histogram
+cuts = c(-1:16);  #Creates the the histogram
 results = rbinom(100000,15,prob)   # 100000 independent binomial trials with n = 15 and probability = .522
 hist(results, breaks = cuts, xlab = "Made Free Throws", prob=TRUE); #graphs relative frequency
 
@@ -31,12 +31,23 @@ hist(results, breaks = cuts, xlab = "Made Free Throws", prob=TRUE); #graphs rela
 #simulation using the lower limit of the confidence interval
 set.seed(2)  #For repeatable results
 prob = .522  #lower limit of the CI
-x = 100000   #Number of independent binomial experiments
-outcome = numeric(x); z = numeric(x)  #Used to determine probability of 0 free throws in 15 trials
-for (i in 1:x)
+x = 100000; g=10000;   #Number of independent binomial experiments
+outcome = numeric(g); z = numeric(x)  #Used to determine probability of 0 free throws in 15 trials
+for (i in 1:g)
 {
-   z = rbinom(100000,15,prob);       #gives the frequency of made thows
+   z = rbinom(x,15,prob);       #gives the frequency of made thows
 	outcome[i] = mean(z==0);       #probability of making 0 free throws in each sample stored in outcome vector 
 }
-prob_missing15_freethrows = sum(outcome)/ x
-prob_missing15_freethrows
+prob_missing15_freethrows = sum(outcome)/ g
+prob_missing15_freethrows; 
+
+for( i in 1:v)
+{
+	x = 0;
+	while(t!=0)
+	{
+		t = rbinom(1,15,prob);
+		x = x+1;
+	}
+
+}
