@@ -66,30 +66,66 @@ prob_missing15_freethrows = sum(outcome)/ g
 prob_missing15_freethrows; 
 
 
-
-k = 10000;
-v = 1000000;
+prob = .441;
+k = 5000; v = 1000000; #initializers
 number_of_games = numeric(k);
 for( i in 1:k)
 {
-	x = 0;
-	counter = 1;
-	t = numeric(v);
-	repeat
+	x = 0; #used to count how many times 15 free throws are shot without a 0
+	counter = 1; 
+	t = numeric(v);   #vector that keeps track of how many games
+	repeat       #equilvalent of do while loop
 	{
 
-		t[counter] = rbinom(1,15,prob);
+		t[counter] = rbinom(1,15,prob); #sample of 15 free throws
 
-		if (t[counter]==0)
+		if (t[counter]==0) #evaluates to true if there is zero makes in 15 free throws
 		{
-			break;
+			break; #ends break statement and fills the number_of_games_vector
 		}
-		else
+		else  #increments
 		{
 		counter = counter +1;
 		x = x+1;
 		}
 	}
 	
-	number_of_games[i] = x;
+	number_of_games[i] = x/3;  #dividing by three because their is approximately 3 15 free throw binomial experiments
 }
+number_of_games
+
+
+mean(number_of_games) # on average how many games would a have to be played to see 15 missed free throws in a row.
+plot(num, col = "Blue", xlab = "loop iteration")
+
+
+
+prob = .522; #Using lower end of original CI
+k = 5000; v = 1000000; 
+number_of_games2 = numeric(k);
+for( i in 1:k)
+{
+	x = 0;
+	counter = 1; 
+	t = numeric(v);   
+	repeat       
+	{
+
+		t[counter] = rbinom(1,15,prob);
+
+		if (t[counter]==0) 
+		{
+			break; 
+		}
+		else  
+		{
+		counter = counter +1;
+		x = x+1;
+		}
+	}
+	
+	number_of_games2[i] = x/3; 
+}
+mean(number_of_games2) 
+plot(num, col = "Blue", xlab = "loop iteration")
+number_of_games2
